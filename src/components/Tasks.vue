@@ -1,13 +1,13 @@
 <template>
   <div class="tasks">
-    <h1>Task Manager</h1>
-    <input v-model="taskname" placeholder="任务名称" class="input">
-    <button @click="createTask()" class="taskButton">Create Task</button>
+    <h1>運用任務</h1>
+    <input v-model="taskname" placeholder="新しい運用タスクを作成" class="input">
+    <button @click="createTask()" class="taskButton">新規</button>
     <ul>
       <li v-for="task in tasks" :key="task.id" class="task">
         <p class="text">{{ task.name }}</p>
-        <p @click="toggleComplete(task)" class="text button">{{ task.completed ? 'completed' : 'not completed' }}</p>
-        <p @click="deleteTask(task)" class="text button delete">Delete task</p>
+        <p @click="toggleComplete(task)" class="text button">{{ task.completed ? '完了した' : '未完了の' }}</p>
+        <p @click="deleteTask(task)" class="text button delete">運用タスクを削除する</p>
       </li>
     </ul>
   </div>
@@ -23,29 +23,31 @@ export default {
   name: 'Tasks',
   methods: {
     toggleComplete(task) {
-      const updatedTask = {
-        ...task,
-        completed: !task.completed
-      }
+      const input = {
+        ID: task.ID,  // 使用 task.ID
+        name: task.name,  // 包含 name，即使未更改
+        completed: !task.completed  // 切换 completed 状态
+      };
+
       this.$apollo.mutate({
         mutation: UpdateTask,
-        variables: updatedTask,
+        variables: { input },  // 使用 { input } 替代 updatedTask
         update: (store, { data: { updateTask } }) => {
-          const data = store.readQuery({ query: ListTasks })
-          const index = data.listTasks.items.findIndex(item => item.id === updateTask.id)
-          data.listTasks.items[index] = updateTask
-          store.writeQuery({ query: ListTasks, data })
+          const data = store.readQuery({ query: ListTasks });
+          const index = data.listTasks.items.findIndex(item => item.ID === updateTask.ID);  // 使用 updateTask.ID
+          data.listTasks.items[index] = updateTask;
+          store.writeQuery({ query: ListTasks, data });
         },
         optimisticResponse: {
           __typename: 'Mutation',
           updateTask: {
             __typename: 'Task',
-            ...updatedTask
+            ...input  // 使用 input 构建乐观响应
           }
         },
       })
-      .then(data => console.log(data))
-      .catch(error => console.error(error))
+        .then(data => console.log('Task updated:', data))
+        .catch(error => console.error('Error updating task:', error));
     },
     deleteTask(taskToDelete) {
       console.log('Received task for deletion:', taskToDelete);
