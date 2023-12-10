@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Tasks from '@/components/Tasks'
+import Faq from '@/components/Faq'
 
 Vue.use(Router)
 
@@ -8,8 +8,8 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'Tasks',
-      component: Tasks
+      name: 'Faq',
+      component: Faq
     }
   ]
 })
