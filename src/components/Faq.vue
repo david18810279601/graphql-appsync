@@ -28,14 +28,14 @@
 
         <div class="header-link">
           <ul class="header-nav">
-            <li class="header-nav__list"><a class="header-nav__link"
-                                            href="./"
-                                            xt-marked="ok" previewlistener="true">よくあるご質問トップ</a></li>
-
+            <li class="header-nav__list">
+              <a class="header-nav__link" href="#" @click.prevent="showFAQForm">よくあるご質問トップ</a>
+            </li>
           </ul>
         </div>
       </div>
-    </header><!-- /.header -->
+    </header>
+    <!-- /.header -->
     <!-- ============/ヘッダ============ -->
 
 
@@ -228,9 +228,11 @@
 
 <script>
 
-import ListNRIFQAS  from "../queries/ListNRIFQAS";
-
-
+import ListNRIFQAS from "../queries/ListNRIFQAS";
+import FAQForm from './FAQForm.vue'; // 导入FAQForm组件
+import Vue from 'vue';
+import VModal from 'vue-js-modal';
+Vue.use(VModal, { dynamic: true });
 import uuidV4 from 'uuid/v4'
 
 // 在这里引入外部CSS文件
@@ -242,7 +244,8 @@ export default {
       faqs: [],
       tag: '',
       category: '',
-      hydrated: false
+      hydrated: false,
+      isFAQFormVisible: false, // 控制FAQForm.vue组件的显示状态
     };
   },
   async mounted() {
@@ -277,8 +280,17 @@ export default {
         console.log('Result:', data, loading, networkStatus);
       }
     }
-  }
-}
+  },
+  methods: {
+    showFAQForm() {
+      // 使用vue-js-modal的方法来显示FAQForm.vue组件
+      this.$modal.show(FAQForm);
+    },
+  },
+  components: {
+    FAQForm,
+  },
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
