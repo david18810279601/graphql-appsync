@@ -89,6 +89,7 @@ export default {
         });
 
         this.closeForm();
+        this.$emit('faqSubmitted'); // 发出事件
       } catch (error) {
         console.error('Error submitting FAQ:', error);
         // 处理错误
@@ -96,7 +97,6 @@ export default {
     },
   },
 };
-</script>
 </script>
 
 <style scoped>

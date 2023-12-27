@@ -88,8 +88,9 @@
                                       <div data-v-5b52de44="" class="sai-tagged-input">
                                         <div data-v-5b52de44=""
                                              class="sai-tagged-input__field"><input
-                                          data-v-5b52de44="" type="text" size="1"
-                                          placeholder="キーワードを入力してください">
+                                          data-v-5b52de44="" type="text" size="1" v-model="searchTitle" @input="updateSearch"
+                                          placeholder="キーワードを入力してください"
+                                          >
                                           <div data-v-5b52de44=""
                                                class="sai-tagged-input__field__close"
                                                style="display: none;"><a
@@ -244,6 +245,7 @@ export default {
       faqs: [],
       tag: '',
       category: '',
+      searchTitle: '', // 用户输入的搜索关键词
       hydrated: false,
       isFAQFormVisible: false, // 控制FAQForm.vue组件的显示状态
     };
@@ -258,19 +260,23 @@ export default {
       console.error('Error in mounted hook:', error);
       this.hydrated = true;
     }
+    this.$on('faqSubmitted', this.refreshFAQs);
   },
   apollo: {
     faqs: {
       query: ListNRIFQAS,
       variables() {
         let filter = {};
-        if (this.tag) {
-          filter.tag = { eq: this.tag };
+        if (this.searchTitle) {
+          filter.title = { eq: this.searchTitle };
+        } else {
+          if (this.tag) {
+            filter.tag = { eq: this.tag };
+          }
+          if (this.category) {
+            filter.category = { eq: this.category };
+          }
         }
-        if (this.category) {
-          filter.category = { eq: this.category };
-        }
-
         return Object.keys(filter).length ? { filter } : {};
       },
       update: data => {
@@ -283,9 +289,15 @@ export default {
   },
   methods: {
     showFAQForm() {
-      // 使用vue-js-modal的方法来显示FAQForm.vue组件
       this.$modal.show(FAQForm);
     },
+    refreshFAQs() {
+      this.$apollo.queries.faqs.refetch();
+    },
+    updateSearch() {
+      // 当搜索关键词改变时，重新获取 faqs
+      this.$apollo.queries.faqs.refetch();
+    }
   },
   components: {
     FAQForm,
