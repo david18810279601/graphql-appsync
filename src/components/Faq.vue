@@ -297,6 +297,7 @@ export default {
     updateSearch() {
       // 当搜索关键词改变时，重新获取 faqs
       this.$apollo.queries.faqs.refetch();
+      console.log('1111');
     }
   },
   components: {
