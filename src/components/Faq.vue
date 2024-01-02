@@ -371,6 +371,7 @@ export default {
       itemFa1List: true,
       faqInfo: {
         detail: "",
+        answer: "", 
       },
       
     };
@@ -425,7 +426,6 @@ export default {
       console.log('1111');
     },
     async clickOpenFaqItem(data) {
-      console.log('Selected FAQ ID:', data.id);
     
       // 创建一个基于 id 的过滤器
       const filter = {
