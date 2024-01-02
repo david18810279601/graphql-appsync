@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "aws-appsync": "^1.0.10",
+    "axios": "^1.6.3",
     "graphql-tag": "^2.7.3",
     "uuid": "^3.2.1",
     "vue": "^2.7.15",

@@ -424,11 +424,22 @@ export default {
       this.$apollo.queries.faqs.refetch();
       console.log('1111');
     },
-    clickOpenFaqItem(data) {
-      console.log('1111111', data.id);
-      this.$apollo.queries.faqs.refetch();
-      
-      this.$data.itemFa1List = false;
+    async clickOpenFaqItem(data) {
+      console.log('Selected FAQ ID:', data.id);
+    
+      // 创建一个基于 id 的过滤器
+      const filter = {
+        id: { eq: data.id }
+      };
+        // 使用 ListNRIFQAS 查询并传入过滤器
+        const response = await this.$apollo.query({
+          query: ListNRIFQAS,
+          variables: { filter: filter },
+        });
+        
+          // 打印获取到的数据，用于调试
+        console.log('Fetched data for ID:', data.id, response.data);
+
     },
     clickCloseFaqItem() {
      this.$data.itemFa1List = true;
