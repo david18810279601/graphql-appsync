@@ -28,14 +28,14 @@
 
         <div class="header-link">
           <ul class="header-nav">
-            <li class="header-nav__list"><a class="header-nav__link"
-                                            href="./"
-                                            xt-marked="ok" previewlistener="true">よくあるご質問トップ</a></li>
-
+            <li class="header-nav__list">
+              <a class="header-nav__link" href="#" @click.prevent="showFAQForm">よくあるご質問トップ</a>
+            </li>
           </ul>
         </div>
       </div>
-    </header><!-- /.header -->
+    </header>
+    <!-- /.header -->
     <!-- ============/ヘッダ============ -->
 
 
@@ -88,8 +88,9 @@
                                       <div data-v-5b52de44="" class="sai-tagged-input">
                                         <div data-v-5b52de44=""
                                              class="sai-tagged-input__field"><input
-                                          data-v-5b52de44="" type="text" size="1"
-                                          placeholder="キーワードを入力してください">
+                                          data-v-5b52de44="" type="text" size="1" v-model="searchTitle" @input="updateSearch"
+                                          placeholder="キーワードを入力してください"
+                                          >
                                           <div data-v-5b52de44=""
                                                class="sai-tagged-input__field__close"
                                                style="display: none;"><a
@@ -228,9 +229,11 @@
 
 <script>
 
-import ListNRIFQAS  from "../queries/ListNRIFQAS";
-
-
+import ListNRIFQAS from "../queries/ListNRIFQAS";
+import FAQForm from './FAQForm.vue'; // 导入FAQForm组件
+import Vue from 'vue';
+import VModal from 'vue-js-modal';
+Vue.use(VModal, { dynamic: true });
 import uuidV4 from 'uuid/v4'
 
 // 在这里引入外部CSS文件
@@ -242,7 +245,9 @@ export default {
       faqs: [],
       tag: '',
       category: '',
-      hydrated: false
+      searchTitle: '', // 用户输入的搜索关键词
+      hydrated: false,
+      isFAQFormVisible: false, // 控制FAQForm.vue组件的显示状态
     };
   },
   async mounted() {
@@ -255,19 +260,23 @@ export default {
       console.error('Error in mounted hook:', error);
       this.hydrated = true;
     }
+    this.$on('faqSubmitted', this.refreshFAQs);
   },
   apollo: {
     faqs: {
       query: ListNRIFQAS,
       variables() {
         let filter = {};
-        if (this.tag) {
-          filter.tag = { eq: this.tag };
+        if (this.searchTitle) {
+          filter.title = { eq: this.searchTitle };
+        } else {
+          if (this.tag) {
+            filter.tag = { eq: this.tag };
+          }
+          if (this.category) {
+            filter.category = { eq: this.category };
+          }
         }
-        if (this.category) {
-          filter.category = { eq: this.category };
-        }
-
         return Object.keys(filter).length ? { filter } : {};
       },
       update: data => {
@@ -277,8 +286,24 @@ export default {
         console.log('Result:', data, loading, networkStatus);
       }
     }
-  }
-}
+  },
+  methods: {
+    showFAQForm() {
+      this.$modal.show(FAQForm);
+    },
+    refreshFAQs() {
+      this.$apollo.queries.faqs.refetch();
+    },
+    updateSearch() {
+      // 当搜索关键词改变时，重新获取 faqs
+      this.$apollo.queries.faqs.refetch();
+      console.log('1111');
+    }
+  },
+  components: {
+    FAQForm,
+  },
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
