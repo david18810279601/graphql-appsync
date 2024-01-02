@@ -211,24 +211,32 @@
                                 </div>
                               </div>
                               <div v-else >
-                                <div data-v-688a1315="" id="sai-faq-top" @click="clickCloseFaqItem" class="sai-content__wrap__clear" style="">
-                                <a data-v-688a1315="" class="sai-content__wrap__clear__button" style="display: none;">
-                                  <div data-v-688a1315="" class="sai-content__wrap__clear__button__icon chevron">
-                                    <div data-v-688a1315="" class="img">
-                                      
-                                    </div>
-                                  </div>
-                                  <span data-v-688a1315="">検索結果一覧に戻る</span>
-                                </a>
-                                <a data-v-688a1315="" class="sai-content__wrap__clear__button">
-                                  <div data-v-688a1315="" class="sai-content__wrap__clear__button__icon redo">
-                                    <div data-v-688a1315="" class="img">
-                                      
-                                    </div>
-                                  </div> 
-                                  <span data-v-688a1315="">クリア</span>
-                                </a>
-                              </div>
+                                <div data-v-688a1315="" id="sai-faq-top" class="sai-content__wrap__clear" style="">
+                                  <a data-v-688a1315="" class="sai-content__wrap__clear__button" @click="clickCloseFaqItem">
+                                    <div data-v-688a1315="" class="sai-content__wrap__clear__button__icon redo">
+                                      <div data-v-688a1315="" class="img">
+                                        
+                                      </div>
+                                    </div> 
+                                    <span data-v-688a1315="">クリア</span>
+                                  </a>
+                                  <a data-v-688a1315="" class="sai-content__wrap__clear__button" @click="clickAnswerFaqItem">
+                                    <div data-v-688a1315="" class="sai-content__wrap__clear__button__icon redo">
+                                      <div data-v-688a1315="" class="img">
+                                        
+                                      </div>
+                                    </div> 
+                                    <span data-v-688a1315="">回答</span>
+                                  </a>
+                                  <a data-v-688a1315="" class="sai-content__wrap__clear__button" @click="clickRemoveFaqItem">
+                                    <div data-v-688a1315="" class="sai-content__wrap__clear__button__icon redo">
+                                      <div data-v-688a1315="" class="img">
+                                        
+                                      </div>
+                                    </div> 
+                                    <span data-v-688a1315="">削除</span>
+                                  </a>
+                                </div>
                                 <div data-v-688a1315="" id="sai-scenario"  class="sai-content__wrap__scenario" style="">
                               <div data-v-688a1315="" class="sai-content__wrap__scenario__inner">
                                 <section data-v-688a1315="" class="sai-content__wrap__scenario__inner__section question active">
@@ -248,13 +256,13 @@
                                           </span>
                                         </div> 
                                         <div data-v-688a1315="" class="question">
-                                          年の途中でつみたてNISAをスタートしました。つみたてNISA枠上限の40万円を使い切る方法はありますか？
+                                          {{faqInfo.detail}}
                                         </div>
                                       </div>
                                       <div data-v-688a1315="" class="sai-content__wrap__scenario__inner__section__head__faq">
                                         <div data-v-688a1315="" class="text">
                                           <span data-v-688a1315="">
-                                            FAQ10002780
+                                            {{faqInfo.id}}
                                           </span>
                                         </div>
                                       </div>
@@ -267,6 +275,9 @@
                                           <i data-v-688a1315="" class="sai-content__wrap__scenario__inner__section__head__icon"></i> 
                                           <div data-v-688a1315="" class="sai-content__wrap__scenario__inner__section__head__title">
                                             <div data-v-688a1315="" class="question">
+                                              <span data-v-688a1315="">
+                                                {{faqInfo.answer}}
+                                              </span>
                                             </div>
                                           </div>
                                         </div>
@@ -351,10 +362,13 @@
 
 import ListNRIFQAS from "../queries/ListNRIFQAS";
 import FAQForm from './FAQForm.vue'; // 导入FAQForm组件
+import FAQAnswerForm from './FAQAnswerForm.vue'; // 导入FAQForm组件
 import Vue from 'vue';
 import VModal from 'vue-js-modal';
 Vue.use(VModal, { dynamic: true });
 import uuidV4 from 'uuid/v4'
+import UpdateFAQ from "../mutations/UpdateFAQ";
+import DeleteFAQ from "../mutations/DeleteFAQ";
 
 // 在这里引入外部CSS文件
 import '../assets/style.css';
@@ -370,6 +384,7 @@ export default {
       isFAQFormVisible: false, // 控制FAQForm.vue组件的显示状态
       itemFa1List: true,
       faqInfo: {
+        id: "",
         detail: "",
         answer: "", 
       },
@@ -431,18 +446,55 @@ export default {
       const filter = {
         id: { eq: data.id }
       };
-        // 使用 ListNRIFQAS 查询并传入过滤器
-        const response = await this.$apollo.query({
-          query: ListNRIFQAS,
-          variables: { filter: filter },
-        });
-        
-          // 打印获取到的数据，用于调试
-        console.log('Fetched data for ID:', data.id, response.data);
+      // 使用 ListNRIFQAS 查询并传入过滤器
+      const response = await this.$apollo.query({
+        query: ListNRIFQAS,
+        variables: { filter: filter },
+      });
+      
+        // 打印获取到的数据，用于调试
+      console.log('Fetched data for ID:', data.id, response.data);
+      
+      this.$data.faqInfo = {
+        id: "FAQ" + response.data.listNRIFQAS.items[0].id,
+        detail: response.data.listNRIFQAS.items[0].detail,
+        answer: response.data.listNRIFQAS.items[0].answer,
+      }
+      
+     this.$data.itemFa1List = false;
 
     },
     clickCloseFaqItem() {
      this.$data.itemFa1List = true;
+    },
+    clickAnswerFaqItem() {
+      
+      this.$modal.show(FAQAnswerForm);
+      this.$data.itemFa1List = true;
+
+    },
+    async clickRemoveFaqItem() {
+      try {
+        const input = {
+          id: this.$data.faqInfo.id,
+        };
+        console.log(input);
+
+        await this.$apollo.mutate({
+          mutation: DeleteFAQ,
+          variables: {
+            createnrifqainput: input,
+          },
+        });
+
+        this.closeForm();
+        this.$emit('faqSubmitted'); // 发出事件
+      } catch (error) {
+        console.error('Error submitting FAQ AS Answer:', error);
+        // 处理错误
+      }
+     this.$data.itemFa1List = true;
+
     },
   },
   components: {

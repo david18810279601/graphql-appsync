@@ -1491,7 +1491,7 @@ button.keyword[data-v-52d1a0ca] {
 .sai-content__wrap__scenario__inner__section__head[data-v-688a1315] {
   padding: 18px 0 6px;
   position: relative;
-  border-bottom: 2px solid #bf0000
+  border-bottom: 2px solid #005bac
 }
 
 .answer .sai-content__wrap__scenario__inner__section__head[data-v-688a1315] {
@@ -3519,10 +3519,10 @@ li a[data-v-659a7792] {
   padding: 8px 0;
   font-size: 16px;
   font-weight: 700;
-  color: #bf0000;
+  color: #005bac;
   text-decoration: none;
   text-align: center;
-  border: 1px solid #bf0000;
+  border: 1px solid #005bac;
   border-radius: 4px;
   background-color: #fff;
   cursor: pointer
