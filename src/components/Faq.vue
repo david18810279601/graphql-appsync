@@ -117,8 +117,8 @@
                                 </div>
                               </div>
                             </div>
-                            <div data-v-688a1315="" class="sai-content__wrap__faq" style="">
-                              <div data-v-688a1315="" class="sai-content__wrap__faq__content">
+                            <div data-v-688a1315="" class="sai-content__wrap__faq" style="" id="ItemDetail">
+                              <div data-v-688a1315="" class="sai-content__wrap__faq__content" v-if="itemFa1List">
                                 <div data-v-688a1315=""
                                      class="sai-content__wrap__faq__content__header">
                                   <div data-v-688a1315=""
@@ -203,13 +203,133 @@
                                         </div>
                                       </div>
                                       <div data-v-d5467936=""
-                                           class="sai-list-content__lists__item__icon">
+                                           class="sai-list-content__lists__item__icon" @click="clickOpenFaqItem(faq)">
                                         <div data-v-d5467936="" class="img"></div>
                                       </div>
                                     </li>
                                   </ul>
                                 </div>
                               </div>
+                              <div v-else >
+                                <div data-v-688a1315="" id="sai-faq-top" @click="clickCloseFaqItem" class="sai-content__wrap__clear" style="">
+                                <a data-v-688a1315="" class="sai-content__wrap__clear__button" style="display: none;">
+                                  <div data-v-688a1315="" class="sai-content__wrap__clear__button__icon chevron">
+                                    <div data-v-688a1315="" class="img">
+                                      
+                                    </div>
+                                  </div>
+                                  <span data-v-688a1315="">検索結果一覧に戻る</span>
+                                </a>
+                                <a data-v-688a1315="" class="sai-content__wrap__clear__button">
+                                  <div data-v-688a1315="" class="sai-content__wrap__clear__button__icon redo">
+                                    <div data-v-688a1315="" class="img">
+                                      
+                                    </div>
+                                  </div> 
+                                  <span data-v-688a1315="">クリア</span>
+                                </a>
+                              </div>
+                                <div data-v-688a1315="" id="sai-scenario"  class="sai-content__wrap__scenario" style="">
+                              <div data-v-688a1315="" class="sai-content__wrap__scenario__inner">
+                                <section data-v-688a1315="" class="sai-content__wrap__scenario__inner__section question active">
+                                  <div data-v-688a1315="" class="sai-content__wrap__scenario__inner__section__head">
+                                    <div data-v-688a1315="" class="scenario_wrap">
+                                      <i data-v-688a1315="" class="sai-content__wrap__scenario__inner__section__head__icon"></i> 
+                                      <div data-v-688a1315="" class="sai-content__wrap__scenario__inner__section__head__title">
+                                        <div data-v-688a1315="" class="ancestors">
+                                          <span data-v-688a1315="">
+                                            NISA
+                                            <span data-v-688a1315="">
+                                              ＞
+                                            </span>
+                                          </span>
+                                          <span data-v-688a1315="">
+                                            つみたてNISA
+                                          </span>
+                                        </div> 
+                                        <div data-v-688a1315="" class="question">
+                                          年の途中でつみたてNISAをスタートしました。つみたてNISA枠上限の40万円を使い切る方法はありますか？
+                                        </div>
+                                      </div>
+                                      <div data-v-688a1315="" class="sai-content__wrap__scenario__inner__section__head__faq">
+                                        <div data-v-688a1315="" class="text">
+                                          <span data-v-688a1315="">
+                                            FAQ10002780
+                                          </span>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div> 
+                                  <div data-v-688a1315="" class="sai-content__wrap__scenario__inner__section__content">
+                                    <section data-v-688a1315="" id="sai-scenario-answer" class="sai-content__wrap__scenario__inner__section answer">
+                                      <div data-v-688a1315="" class="sai-content__wrap__scenario__inner__section__head">
+                                        <div data-v-688a1315="" class="scenario_wrap">
+                                          <i data-v-688a1315="" class="sai-content__wrap__scenario__inner__section__head__icon"></i> 
+                                          <div data-v-688a1315="" class="sai-content__wrap__scenario__inner__section__head__title">
+                                            <div data-v-688a1315="" class="question">
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div> 
+                                      <div data-v-688a1315="" class="sai-content__wrap__scenario__inner__section__content">
+                                        <div data-v-1581f9c6="" data-v-688a1315="" class="VerticalNavigation">
+                                          <div data-v-1581f9c6="" class="navigationContentWrapper">
+                                            <div data-v-1581f9c6="" class="navigationContent">
+                                              <div data-v-1581f9c6="">
+                                                <div data-v-1b34b87b="" data-v-1e039539="" data-v-1581f9c6="" localactive="true">
+                                                  <div data-v-1e039539="" data-v-1b34b87b="" class="sai-resource-list active">
+                                                    <div data-v-1e039539="" data-v-1b34b87b="" class="wrapper">
+                                                      <div data-v-1e039539="" data-v-1b34b87b="" class="content">
+                                                        <div data-v-1e039539="" data-v-1b34b87b="" class="icon"></div> 
+                                                        <div data-v-1e039539="" data-v-1b34b87b="" class="captionWrapper">
+                                                          <div data-v-1e039539="" data-v-1b34b87b="" class="caption" style="">
+                                                          </div>
+                                                        </div>
+                                                      </div>
+                                                      <div data-v-1e039539="" data-v-1b34b87b="" class="items"></div>
+                                                    </div> 
+                                                    <div data-v-1e039539="" data-v-1b34b87b="" class="feedbackArea">
+                                                      <div data-v-d273509c="" data-v-1e039539="" class="resolveFeedback" data-v-1b34b87b="">
+                                                        <div data-v-d273509c="">
+                                                          <div data-v-d273509c="" class="resolveButtonArea">
+                                                            <div data-v-d273509c="" class="feedbackGuide">
+                                                              <div data-v-d273509c="" class="text">
+                                                                解決しましたか？
+                                                              </div>
+                                                            </div> 
+                                                            <div data-v-d273509c="" class="buttonWrapper">
+                                                              <a data-v-d273509c="" class="resolveButton">
+                                                                はい
+                                                              </a> 
+                                                              <a data-v-d273509c="" class="resolveButton">
+                                                                いいえ
+                                                              </a>
+                                                            </div>
+                                                          </div>
+                                                        </div> 
+                                                      </div>
+                                                    </div>
+                                                  </div> 
+                                                  <div data-v-1b34b87b="" class="scrollGuide" style="display: none;">
+                                                    <div data-v-5d9fd387="" data-v-1b34b87b="" class="arrow">
+                                                      <div data-v-5d9fd387="" class="arrow__icon">
+                                                        <img data-v-5d9fd387="" src="/static/img/sai-icon_scroll.d9312c8.gif">
+                                                      </div>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </section>
+                                  </div>
+                                </section>
+                              </div>
+                            </div>
+                              </div>
+
                             </div>
                           </div>
                         </div>
@@ -248,6 +368,11 @@ export default {
       searchTitle: '', // 用户输入的搜索关键词
       hydrated: false,
       isFAQFormVisible: false, // 控制FAQForm.vue组件的显示状态
+      itemFa1List: true,
+      faqInfo: {
+        detail: "",
+      },
+      
     };
   },
   async mounted() {
@@ -298,7 +423,16 @@ export default {
       // 当搜索关键词改变时，重新获取 faqs
       this.$apollo.queries.faqs.refetch();
       console.log('1111');
-    }
+    },
+    clickOpenFaqItem(data) {
+      console.log('1111111', data.id);
+      this.$apollo.queries.faqs.refetch();
+      
+      this.$data.itemFa1List = false;
+    },
+    clickCloseFaqItem() {
+     this.$data.itemFa1List = true;
+    },
   },
   components: {
     FAQForm,
