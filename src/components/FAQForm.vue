@@ -44,6 +44,7 @@
 </template>
 
 <script>
+import { EventBus } from '../assets/event-bus'
 import '../assets/FAQstyle.css';
 import CreateFAQ from "../mutations/CreateFAQ";
 export default {
@@ -88,12 +89,14 @@ export default {
           },
         });
 
+        // 使用 Event Bus 触发全局事件
+        EventBus.$emit('faqSubmitted');
         this.closeForm();
-        this.$emit('faqSubmitted'); // 发出事件
       } catch (error) {
         console.error('Error submitting FAQ:', error);
         // 处理错误
       }
+      this.$data.itemFa1List = true;
     },
   },
 };

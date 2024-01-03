@@ -45,15 +45,14 @@ export default {
     },
     methods: {
       closeForm() {
-        this.$emit("close"); // 通知父组件关闭表单
+        this.$emit("close"); 
       },
       async submitForm() {
         try {
-          // 准备更新的数据
           const input = {
-            id: this.faqInfo.id.substring(3), // 使用从父组件传入的 ID
-            answer: this.updatedAnswer, // 使用更新后的答案
-            createtime: this.faqInfo.createtime // 使用从父组件传入的 createtime
+            id: this.faqInfo.id.substring(3), 
+            answer: this.updatedAnswer,
+            createtime: this.faqInfo.createtime 
           };
   
           console.log("Mutation input data:", input);
@@ -64,7 +63,7 @@ export default {
           });
   
           this.closeForm(); // 关闭表单
-          this.$emit('faqSubmitted'); // 发出一个自定义事件，通知父组件刷新 FAQ 列表
+          this.$emit('faqSubmitted');
         } catch (error) {
           console.error('Error submitting FAQ:', error);
         }

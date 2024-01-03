@@ -215,25 +215,25 @@
                                   <a data-v-688a1315="" class="sai-content__wrap__clear__button" @click="clickCloseFaqItem">
                                     <div data-v-688a1315="" class="sai-content__wrap__clear__button__icon redo">
                                       <div data-v-688a1315="" class="img">
-                                        
+
                                       </div>
-                                    </div> 
+                                    </div>
                                     <span data-v-688a1315="">クリア</span>
                                   </a>
                                   <a data-v-688a1315="" class="sai-content__wrap__clear__button" @click="clickAnswerFaqItem">
                                     <div data-v-688a1315="" class="sai-content__wrap__clear__button__icon redo">
                                       <div data-v-688a1315="" class="img">
-                                        
+
                                       </div>
-                                    </div> 
+                                    </div>
                                     <span data-v-688a1315="">回答</span>
                                   </a>
                                   <a data-v-688a1315="" class="sai-content__wrap__clear__button" @click="clickRemoveFaqItem">
                                     <div data-v-688a1315="" class="sai-content__wrap__clear__button__icon redo">
                                       <div data-v-688a1315="" class="img">
-                                        
+
                                       </div>
-                                    </div> 
+                                    </div>
                                     <span data-v-688a1315="">削除</span>
                                   </a>
                                 </div>
@@ -242,7 +242,7 @@
                                 <section data-v-688a1315="" class="sai-content__wrap__scenario__inner__section question active">
                                   <div data-v-688a1315="" class="sai-content__wrap__scenario__inner__section__head">
                                     <div data-v-688a1315="" class="scenario_wrap">
-                                      <i data-v-688a1315="" class="sai-content__wrap__scenario__inner__section__head__icon"></i> 
+                                      <i data-v-688a1315="" class="sai-content__wrap__scenario__inner__section__head__icon"></i>
                                       <div data-v-688a1315="" class="sai-content__wrap__scenario__inner__section__head__title">
                                         <div data-v-688a1315="" class="ancestors">
                                           <span data-v-688a1315="">
@@ -254,7 +254,7 @@
                                           <span data-v-688a1315="">
                                             つみたてNISA
                                           </span>
-                                        </div> 
+                                        </div>
                                         <div data-v-688a1315="" class="question">
                                           {{faqInfo.detail}}
                                         </div>
@@ -267,12 +267,12 @@
                                         </div>
                                       </div>
                                     </div>
-                                  </div> 
+                                  </div>
                                   <div data-v-688a1315="" class="sai-content__wrap__scenario__inner__section__content">
                                     <section data-v-688a1315="" id="sai-scenario-answer" class="sai-content__wrap__scenario__inner__section answer">
                                       <div data-v-688a1315="" class="sai-content__wrap__scenario__inner__section__head">
                                         <div data-v-688a1315="" class="scenario_wrap">
-                                          <i data-v-688a1315="" class="sai-content__wrap__scenario__inner__section__head__icon"></i> 
+                                          <i data-v-688a1315="" class="sai-content__wrap__scenario__inner__section__head__icon"></i>
                                           <div data-v-688a1315="" class="sai-content__wrap__scenario__inner__section__head__title">
                                             <div data-v-688a1315="" class="question">
                                               <span data-v-688a1315="">
@@ -280,7 +280,7 @@
                                             </div>
                                           </div>
                                         </div>
-                                      </div> 
+                                      </div>
                                       <div data-v-688a1315="" class="sai-content__wrap__scenario__inner__section__content">
                                         <div data-v-1581f9c6="" data-v-688a1315="" class="VerticalNavigation">
                                           <div data-v-1581f9c6="" class="navigationContentWrapper">
@@ -290,7 +290,7 @@
                                                   <div data-v-1e039539="" data-v-1b34b87b="" class="sai-resource-list active">
                                                     <div data-v-1e039539="" data-v-1b34b87b="" class="wrapper">
                                                       <div data-v-1e039539="" data-v-1b34b87b="" class="content">
-                                                        <div data-v-1e039539="" data-v-1b34b87b="" class="icon"></div> 
+                                                        <div data-v-1e039539="" data-v-1b34b87b="" class="icon"></div>
                                                         <div data-v-1e039539="" data-v-1b34b87b="" class="captionWrapper">
                                                           <div data-v-1e039539="" data-v-1b34b87b="" class="caption" style="">
                                                             {{faqInfo.answer}}
@@ -298,7 +298,7 @@
                                                         </div>
                                                       </div>
                                                       <div data-v-1e039539="" data-v-1b34b87b="" class="items"></div>
-                                                    </div> 
+                                                    </div>
                                                     <div data-v-1e039539="" data-v-1b34b87b="" class="feedbackArea">
                                                       <div data-v-d273509c="" data-v-1e039539="" class="resolveFeedback" data-v-1b34b87b="">
                                                         <div data-v-d273509c="">
@@ -307,20 +307,20 @@
                                                               <div data-v-d273509c="" class="text">
                                                                 解決しましたか？
                                                               </div>
-                                                            </div> 
+                                                            </div>
                                                             <div data-v-d273509c="" class="buttonWrapper">
                                                               <a data-v-d273509c="" class="resolveButton">
                                                                 はい
-                                                              </a> 
+                                                              </a>
                                                               <a data-v-d273509c="" class="resolveButton">
                                                                 いいえ
                                                               </a>
                                                             </div>
                                                           </div>
-                                                        </div> 
+                                                        </div>
                                                       </div>
                                                     </div>
-                                                  </div> 
+                                                  </div>
                                                   <div data-v-1b34b87b="" class="scrollGuide" style="display: none;">
                                                     <div data-v-5d9fd387="" data-v-1b34b87b="" class="arrow">
                                                       <div data-v-5d9fd387="" class="arrow__icon">
@@ -365,6 +365,7 @@ import FAQForm from './FAQForm.vue'; // 导入FAQForm组件
 import FAQAnswerForm from './FAQAnswerForm.vue'; // 导入FAQForm组件
 import Vue from 'vue';
 import VModal from 'vue-js-modal';
+import { EventBus } from '../assets/event-bus'
 Vue.use(VModal, { dynamic: true });
 import uuidV4 from 'uuid/v4'
 import UpdateFAQ from "../mutations/UpdateFAQ";
@@ -386,9 +387,9 @@ export default {
       faqInfo: {
         id: "",
         detail: "",
-        answer: "", 
+        answer: "",
       },
-      
+
     };
   },
   async mounted() {
@@ -401,6 +402,7 @@ export default {
       console.error('Error in mounted hook:', error);
       this.hydrated = true;
     }
+    EventBus.$on('faqSubmitted', this.refreshFAQs);
     this.$on('faqSubmitted', this.refreshFAQs);
   },
   apollo: {
@@ -438,11 +440,10 @@ export default {
     updateSearch() {
       // 当搜索关键词改变时，重新获取 faqs
       this.$apollo.queries.faqs.refetch();
-      console.log('1111');
     },
     async clickOpenFaqItem(data) {
       console.log('Selected FAQ ID:', data.id);
-    
+
       // 创建一个基于 id 的过滤器
       const filter = {
         id: { eq: data.id }
@@ -452,59 +453,56 @@ export default {
         query: ListNRIFQAS,
         variables: { filter: filter },
       });
-      
-        // 打印获取到的数据，用于调试
-      console.log('Fetched data for ID:', data.id, response.data);
-      
+
       this.$data.faqInfo = {
         id: "FAQ" + response.data.listNRIFQAS.items[0].id,
         detail: response.data.listNRIFQAS.items[0].detail,
         answer: response.data.listNRIFQAS.items[0].answer,
         createtime: response.data.listNRIFQAS.items[0].createtime,
       }
-      
+
      this.$data.itemFa1List = false;
     },
     clickCloseFaqItem() {
      this.$data.itemFa1List = true;
     },
     clickAnswerFaqItem() {
-      
+
       this.$modal.show(FAQAnswerForm, { faqInfo: this.faqInfo });
       this.$data.itemFa1List = true;
-      
+
     },
 
     async clickRemoveFaqItem() {
       try {
         const faqId = this.$data.faqInfo.id.replace("FAQ", "");
         const createtime = this.$data.faqInfo.createtime;
-    
+
         if (!faqId || !createtime) {
           console.error('No valid ID or createtime for deletion.');
           return;
         }
-    
+
         const input = { id: faqId, createtime };
         console.log("Deleting FAQ with input:", input);
-    
+
         await this.$apollo.mutate({
           mutation: DeleteFAQ,
           variables: { input }
         });
-    
-        this.$emit('faqSubmitted'); 
-    
+
+        this.$emit('faqSubmitted');
+
         // 关闭表单
-        if (this.closeForm) { 
+        if (this.closeForm) {
           this.closeForm();
         }
-    
+
         // 刷新 FAQ 列表
-        if (this.fetchFAQs) { 
+        if (this.fetchFAQs) {
           this.fetchFAQs();
         }
-    
+
       } catch (error) {
         console.error('Error in clickRemoveFaqItem:', error);
       }
