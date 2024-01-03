@@ -16,7 +16,7 @@
           </div>
           <div data-v-3fc1e8b2="" class="input">
             <label for="answer">回答内容:</label>
-            <textarea data-v-3fc1e8b2="" type="text" id="answer" rows="8" class="field" v-model="answer" placeholder=""></textarea>
+            <textarea data-v-3fc1e8b2="" type="text" id="answer" rows="8" class="field" v-model="updatedAnswer" placeholder=""></textarea>
           </div>
           <div data-v-3fc1e8b2="" class="submit">
             <button type="submit" data-v-3fc1e8b2="" class="send">OK</button>
@@ -31,51 +31,44 @@
 import '../assets/FAQstyle.css';
 import UpdateFAQ from "../mutations/UpdateFAQ";
 export default {
-  data() {
-    return {
-      title: '',
-      category: '',
-      tags: '',
-      content: '',
-    };
-  },
-  methods: {
-    closeForm() {
-      // Trigger the close event to notify the parent component to close the form
-      this.$emit("close");
+    props: ['faqInfo'], // 从父组件接收 faqInfo
+    data() {
+      return {
+        updatedAnswer: '', // 存储更新后的答案
+      };
     },
-
-    generateRandomId() {
-      return Math.floor(Math.random() * 9000000000) + 1000000000; // 生成一个十位数的随机数
-    },
-
-    getCurrentISOTime() {
-      return new Date().toISOString(); // 获取当前时间的 ISO 格式字符串
-    },
-
-    async submitForm() {
-      try {
-        const input = {
-          id: this.generateRandomId(),
-          answer: this.content,
-        };
-        console.log(input);
-
-        await this.$apollo.mutate({
-          mutation: UpdateFAQ,
-          variables: {
-            createnrifqainput: input,
-          },
-        });
-
-        this.closeForm();
-        this.$emit('faqSubmitted'); // 发出事件
-      } catch (error) {
-        console.error('Error submitting FAQ:', error);
-        // 处理错误
+    mounted() {
+      // 当组件加载时，用传入的答案初始化 updatedAnswer
+      if (this.faqInfo && this.faqInfo.answer) {
+        this.updatedAnswer = this.faqInfo.answer;
       }
     },
-  },
+    methods: {
+      closeForm() {
+        this.$emit("close"); // 通知父组件关闭表单
+      },
+      async submitForm() {
+        try {
+          // 准备更新的数据
+          const input = {
+            id: this.faqInfo.id, // 使用从父组件传入的 ID
+            answer: this.updatedAnswer, // 使用更新后的答案
+            createtime: this.faqInfo.createtime // 使用从父组件传入的 createtime
+          };
+  
+          // 调用 GraphQL mutation 更新数据
+          await this.$apollo.mutate({
+            mutation: UpdateFAQ,
+            variables: { input },
+          });
+  
+          this.closeForm(); // 关闭表单
+          this.$emit('faqSubmitted'); // 发出一个自定义事件，通知父组件刷新 FAQ 列表
+        } catch (error) {
+          console.error('Error submitting FAQ:', error);
+        }
+      },
+    },
 };
 </script>
 

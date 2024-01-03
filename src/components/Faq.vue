@@ -470,10 +470,11 @@ export default {
     },
     clickAnswerFaqItem() {
       
-      this.$modal.show(FAQAnswerForm);
+      this.$modal.show(FAQAnswerForm, { faqInfo: this.faqInfo });
       this.$data.itemFa1List = true;
-
+      
     },
+
     async clickRemoveFaqItem() {
       try {
         const faqId = this.$data.faqInfo.id.replace("FAQ", "");
