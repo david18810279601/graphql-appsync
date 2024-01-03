@@ -51,11 +51,12 @@ export default {
         try {
           // 准备更新的数据
           const input = {
-            id: this.faqInfo.id, // 使用从父组件传入的 ID
+            id: this.faqInfo.id.substring(3), // 使用从父组件传入的 ID
             answer: this.updatedAnswer, // 使用更新后的答案
             createtime: this.faqInfo.createtime // 使用从父组件传入的 createtime
           };
   
+          console.log("Mutation input data:", input);
           // 调用 GraphQL mutation 更新数据
           await this.$apollo.mutate({
             mutation: UpdateFAQ,

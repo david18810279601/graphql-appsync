@@ -276,7 +276,6 @@
                                           <div data-v-688a1315="" class="sai-content__wrap__scenario__inner__section__head__title">
                                             <div data-v-688a1315="" class="question">
                                               <span data-v-688a1315="">
-                                                {{faqInfo.answer}}
                                               </span>
                                             </div>
                                           </div>
@@ -294,6 +293,7 @@
                                                         <div data-v-1e039539="" data-v-1b34b87b="" class="icon"></div> 
                                                         <div data-v-1e039539="" data-v-1b34b87b="" class="captionWrapper">
                                                           <div data-v-1e039539="" data-v-1b34b87b="" class="caption" style="">
+                                                            {{faqInfo.answer}}
                                                           </div>
                                                         </div>
                                                       </div>
