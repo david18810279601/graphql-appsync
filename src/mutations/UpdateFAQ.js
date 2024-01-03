@@ -8,6 +8,7 @@ export default gql`
     detail
     category
     tag
+    answer
     createtime
   }
   }
