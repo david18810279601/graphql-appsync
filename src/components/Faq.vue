@@ -211,24 +211,32 @@
                                 </div>
                               </div>
                               <div v-else >
-                                <div data-v-688a1315="" id="sai-faq-top" @click="clickCloseFaqItem" class="sai-content__wrap__clear" style="">
-                                <a data-v-688a1315="" class="sai-content__wrap__clear__button" style="display: none;">
-                                  <div data-v-688a1315="" class="sai-content__wrap__clear__button__icon chevron">
-                                    <div data-v-688a1315="" class="img">
-                                      
-                                    </div>
-                                  </div>
-                                  <span data-v-688a1315="">検索結果一覧に戻る</span>
-                                </a>
-                                <a data-v-688a1315="" class="sai-content__wrap__clear__button">
-                                  <div data-v-688a1315="" class="sai-content__wrap__clear__button__icon redo">
-                                    <div data-v-688a1315="" class="img">
-                                      
-                                    </div>
-                                  </div> 
-                                  <span data-v-688a1315="">クリア</span>
-                                </a>
-                              </div>
+                                <div data-v-688a1315="" id="sai-faq-top" class="sai-content__wrap__clear" style="">
+                                  <a data-v-688a1315="" class="sai-content__wrap__clear__button" @click="clickCloseFaqItem">
+                                    <div data-v-688a1315="" class="sai-content__wrap__clear__button__icon redo">
+                                      <div data-v-688a1315="" class="img">
+                                        
+                                      </div>
+                                    </div> 
+                                    <span data-v-688a1315="">クリア</span>
+                                  </a>
+                                  <a data-v-688a1315="" class="sai-content__wrap__clear__button" @click="clickAnswerFaqItem">
+                                    <div data-v-688a1315="" class="sai-content__wrap__clear__button__icon redo">
+                                      <div data-v-688a1315="" class="img">
+                                        
+                                      </div>
+                                    </div> 
+                                    <span data-v-688a1315="">回答</span>
+                                  </a>
+                                  <a data-v-688a1315="" class="sai-content__wrap__clear__button" @click="clickRemoveFaqItem">
+                                    <div data-v-688a1315="" class="sai-content__wrap__clear__button__icon redo">
+                                      <div data-v-688a1315="" class="img">
+                                        
+                                      </div>
+                                    </div> 
+                                    <span data-v-688a1315="">削除</span>
+                                  </a>
+                                </div>
                                 <div data-v-688a1315="" id="sai-scenario"  class="sai-content__wrap__scenario" style="">
                               <div data-v-688a1315="" class="sai-content__wrap__scenario__inner">
                                 <section data-v-688a1315="" class="sai-content__wrap__scenario__inner__section question active">
@@ -248,13 +256,13 @@
                                           </span>
                                         </div> 
                                         <div data-v-688a1315="" class="question">
-                                          {{ faqInfo.detail }}
+                                          {{faqInfo.detail}}
                                         </div>
                                       </div>
                                       <div data-v-688a1315="" class="sai-content__wrap__scenario__inner__section__head__faq">
                                         <div data-v-688a1315="" class="text">
                                           <span data-v-688a1315="">
-                                            FAQ{{ faqInfo.id }}
+                                            {{faqInfo.id}}
                                           </span>
                                         </div>
                                       </div>
@@ -267,6 +275,9 @@
                                           <i data-v-688a1315="" class="sai-content__wrap__scenario__inner__section__head__icon"></i> 
                                           <div data-v-688a1315="" class="sai-content__wrap__scenario__inner__section__head__title">
                                             <div data-v-688a1315="" class="question">
+                                              <span data-v-688a1315="">
+                                                {{faqInfo.answer}}
+                                              </span>
                                             </div>
                                           </div>
                                         </div>
@@ -351,10 +362,13 @@
 
 import ListNRIFQAS from "../queries/ListNRIFQAS";
 import FAQForm from './FAQForm.vue'; // 导入FAQForm组件
+import FAQAnswerForm from './FAQAnswerForm.vue'; // 导入FAQForm组件
 import Vue from 'vue';
 import VModal from 'vue-js-modal';
 Vue.use(VModal, { dynamic: true });
 import uuidV4 from 'uuid/v4'
+import UpdateFAQ from "../mutations/UpdateFAQ";
+import DeleteFAQ from "../mutations/DeleteFAQ";
 
 // 在这里引入外部CSS文件
 import '../assets/style.css';
@@ -370,6 +384,7 @@ export default {
       isFAQFormVisible: false, // 控制FAQForm.vue组件的显示状态
       itemFa1List: true,
       faqInfo: {
+        id: "",
         detail: "",
         answer: "", 
       },
@@ -432,35 +447,67 @@ export default {
       const filter = {
         id: { eq: data.id }
       };
-    
-      try {
-        // 使用 ListNRIFQAS 查询并传入过滤器
-        const response = await this.$apollo.query({
-          query: ListNRIFQAS,
-          variables: { filter: filter },
-        });
-    
+      // 使用 ListNRIFQAS 查询并传入过滤器
+      const response = await this.$apollo.query({
+        query: ListNRIFQAS,
+        variables: { filter: filter },
+      });
+      
         // 打印获取到的数据，用于调试
-        console.log('Fetched data for ID:', data.id, response.data);
-    
-        // 检查是否有返回数据
-        if (response.data && response.data.listNRIFQAS && response.data.listNRIFQAS.items.length > 0) {
-          // 更新组件状态以显示详细信息和 ID
-          this.faqInfo = {
-            id: response.data.listNRIFQAS.items[0].id,
-            detail: response.data.listNRIFQAS.items[0].detail,
-            answer: response.data.listNRIFQAS.items[0].answer,
-          };
-          this.$data.itemFa1List = false;
-        } else {
-          console.error('No FAQ found with the given ID');
-        }
-      } catch (error) {
-        console.error('Error fetching FAQ details:', error);
+      console.log('Fetched data for ID:', data.id, response.data);
+      
+      this.$data.faqInfo = {
+        id: "FAQ" + response.data.listNRIFQAS.items[0].id,
+        detail: response.data.listNRIFQAS.items[0].detail,
+        answer: response.data.listNRIFQAS.items[0].answer,
+        createtime: response.data.listNRIFQAS.items[0].createtime,
       }
+      
+     this.$data.itemFa1List = false;
     },
     clickCloseFaqItem() {
      this.$data.itemFa1List = true;
+    },
+    clickAnswerFaqItem() {
+      
+      this.$modal.show(FAQAnswerForm);
+      this.$data.itemFa1List = true;
+
+    },
+    async clickRemoveFaqItem() {
+      try {
+        const faqId = this.$data.faqInfo.id.replace("FAQ", "");
+        const createtime = this.$data.faqInfo.createtime;
+    
+        if (!faqId || !createtime) {
+          console.error('No valid ID or createtime for deletion.');
+          return;
+        }
+    
+        const input = { id: faqId, createtime };
+        console.log("Deleting FAQ with input:", input);
+    
+        await this.$apollo.mutate({
+          mutation: DeleteFAQ,
+          variables: { input }
+        });
+    
+        this.$emit('faqSubmitted'); 
+    
+        // 关闭表单
+        if (this.closeForm) { 
+          this.closeForm();
+        }
+    
+        // 刷新 FAQ 列表
+        if (this.fetchFAQs) { 
+          this.fetchFAQs();
+        }
+    
+      } catch (error) {
+        console.error('Error in clickRemoveFaqItem:', error);
+      }
+      this.$data.itemFa1List = true;
     },
   },
   components: {
