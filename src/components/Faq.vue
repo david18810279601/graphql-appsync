@@ -248,13 +248,13 @@
                                           </span>
                                         </div> 
                                         <div data-v-688a1315="" class="question">
-                                          年の途中でつみたてNISAをスタートしました。つみたてNISA枠上限の40万円を使い切る方法はありますか？
+                                          {{ faqInfo.detail }}
                                         </div>
                                       </div>
                                       <div data-v-688a1315="" class="sai-content__wrap__scenario__inner__section__head__faq">
                                         <div data-v-688a1315="" class="text">
                                           <span data-v-688a1315="">
-                                            FAQ10002780
+                                            FAQ{{ faqInfo.id }}
                                           </span>
                                         </div>
                                       </div>
@@ -426,20 +426,38 @@ export default {
       console.log('1111');
     },
     async clickOpenFaqItem(data) {
+      console.log('Selected FAQ ID:', data.id);
     
       // 创建一个基于 id 的过滤器
       const filter = {
         id: { eq: data.id }
       };
+    
+      try {
         // 使用 ListNRIFQAS 查询并传入过滤器
         const response = await this.$apollo.query({
           query: ListNRIFQAS,
           variables: { filter: filter },
         });
-        
-          // 打印获取到的数据，用于调试
+    
+        // 打印获取到的数据，用于调试
         console.log('Fetched data for ID:', data.id, response.data);
-
+    
+        // 检查是否有返回数据
+        if (response.data && response.data.listNRIFQAS && response.data.listNRIFQAS.items.length > 0) {
+          // 更新组件状态以显示详细信息和 ID
+          this.faqInfo = {
+            id: response.data.listNRIFQAS.items[0].id,
+            detail: response.data.listNRIFQAS.items[0].detail,
+            answer: response.data.listNRIFQAS.items[0].answer,
+          };
+          this.$data.itemFa1List = false;
+        } else {
+          console.error('No FAQ found with the given ID');
+        }
+      } catch (error) {
+        console.error('Error fetching FAQ details:', error);
+      }
     },
     clickCloseFaqItem() {
      this.$data.itemFa1List = true;
