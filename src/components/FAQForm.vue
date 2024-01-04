@@ -21,9 +21,9 @@
           <div data-v-3fc1e8b2="" class="input">
             <label for="category">カテゴリ:</label>
             <select data-v-3fc1e8b2="" id="category" class="field" v-model="category">
-              <option value="分类1">カテゴリ1</option>
-              <option value="分类2">カテゴリ2</option>
-              <option value="分类3">カテゴリ3</option>
+              <option value="カテゴリ1">カテゴリ1</option>
+              <option value="カテゴリ2">カテゴリ2</option>
+              <option value="カテゴリ3">カテゴリ3</option>
             </select>
           </div>
           <div data-v-3fc1e8b2="" class="input">
