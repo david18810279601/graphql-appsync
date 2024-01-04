@@ -16,7 +16,7 @@
           </div>
           <div data-v-3fc1e8b2="" class="input">
             <label for="answer">回答内容:</label>
-            <textarea data-v-3fc1e8b2="" type="text" id="answer" rows="8" class="field" v-model="updatedAnswer" placeholder=""></textarea>
+            <quill-editor data-v-3fc1e8b2="" :options="editorOptions" @blur="onEditorBlur($event)"  @ready="onEditorReady($event)" @focus="onEditorFocus($event)" id="answer" rows="8" class="field" v-model="updatedAnswer"></quill-editor>
           </div>
           <div data-v-3fc1e8b2="" class="submit">
             <button type="submit" data-v-3fc1e8b2="" class="send">OK</button>
@@ -30,11 +30,23 @@
 <script>
 import '../assets/FAQstyle.css';
 import UpdateFAQ from "../mutations/UpdateFAQ";
+import { quillEditor } from 'vue-quill-editor'
+import 'quill/dist/quill.core.css'
+import 'quill/dist/quill.snow.css'
+import 'quill/dist/quill.bubble.css'
+
 export default {
-    props: ['faqInfo'], // 从父组件接收 faqInfo
+    components: {
+      quillEditor
+    },
+    props: ['faqInfo'],
     data() {
       return {
         updatedAnswer: '', // 存储更新后的答案
+        editorOptions: {
+          // options for the quill editor
+          placeholder: 'Type your text here...'
+        },
       };
     },
     mounted() {
@@ -45,23 +57,23 @@ export default {
     },
     methods: {
       closeForm() {
-        this.$emit("close"); 
+        this.$emit("close");
       },
       async submitForm() {
         try {
           const input = {
-            id: this.faqInfo.id.substring(3), 
+            id: this.faqInfo.id.substring(3),
             answer: this.updatedAnswer,
-            createtime: this.faqInfo.createtime 
+            createtime: this.faqInfo.createtime
           };
-  
+
           console.log("Mutation input data:", input);
           // 调用 GraphQL mutation 更新数据
           await this.$apollo.mutate({
             mutation: UpdateFAQ,
             variables: { input },
           });
-  
+
           this.closeForm(); // 关闭表单
           this.$emit('faqSubmitted');
         } catch (error) {
