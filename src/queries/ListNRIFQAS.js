@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 
 export default gql`
-  query ListNRIFQAS($filter: TableNRIFQAFilterInput) {
+query ListAllNRIFQAS($filter: TableNRIFQAFilterInput) {
   listNRIFQAS(filter: $filter) {
     items {
       id
@@ -11,7 +11,7 @@ export default gql`
       tag
       answer
       createtime
-     }
-   }
- }
+    }
+  }
+}
 `

@@ -59,6 +59,15 @@ export default {
       closeForm() {
         this.$emit("close");
       },
+      onEditorReady(editor) {
+        console.log('Editor is ready', editor);
+      },
+      onEditorFocus() {
+        console.log('Editor is focused');
+      },
+      onEditorBlur() {
+        console.log('Editor has lost focus');
+      },
       async submitForm() {
         try {
           const input = {
@@ -85,5 +94,16 @@ export default {
 </script>
 
 <style scoped>
+
+/* 调整编辑器容器的大小 */
+.ql-container {
+  height: 800px; /* 根据需要调整高度 */
+  width: 100%;  /* 根据需要调整宽度，这里设置为占据全部可用宽度 */
+}
+
+/* 调整编辑器内部编辑区域的大小 */
+.ql-editor {
+  height: 100%; /* 使编辑区域高度充满整个编辑器容器 */
+}
 
 </style>
