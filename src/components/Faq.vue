@@ -423,17 +423,20 @@ export default {
       query: ListNRIFQAS,
       variables() {
         let filter = {};
+
+        // 使用title, tag, category作为过滤条件
         if (this.searchTitle) {
-          filter.title = { eq: this.searchTitle };
-        } else {
-          if (this.tag) {
-            filter.tag = { eq: this.tag };
-          }
-          if (this.category) {
-            filter.category = { eq: this.category };
-          }
+          filter.title = { contains: this.searchTitle };
         }
-        return Object.keys(filter).length ? { filter } : {};
+        if (this.tag) {
+          filter.tag = { eq: this.tag };
+        }
+        if (this.category) {
+          filter.category = { eq: this.category };
+        }
+
+        // 如果没有任何过滤条件，返回一个默认的过滤对象
+        return { filter: Object.keys(filter).length > 0 ? filter : { id: { ne: "" } } };
       },
       update: data => {
         return data.listNRIFQAS.items;
@@ -459,8 +462,7 @@ export default {
 
       // 创建一个基于 id 的过滤器
       const filter = {
-        id: { eq: data.id }
-      };
+        id: { eq: data.id }};
       // 使用 ListNRIFQAS 查询并传入过滤器
       const response = await this.$apollo.query({
         query: ListNRIFQAS,
