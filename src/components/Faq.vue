@@ -29,7 +29,7 @@
         <div class="header-link">
           <ul class="header-nav">
             <li class="header-nav__list">
-              <a class="header-nav__link" href="#" @click.prevent="showFAQForm">よくあるご質問トップ</a>
+              <a class="header-nav__link" href="#" @click.prevent="showFAQForm">質問を送信してください</a>
             </li>
           </ul>
         </div>
